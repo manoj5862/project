@@ -45,4 +45,23 @@ public class RegisterServiceImpl implements RegisterService {
 		return false;
 	}
 
+	@Override
+	public boolean loginService(String email, String Password) {
+		System.out.println("Invoked Login Service Method");
+		try {
+		RegisterEntity entity = this.dao.getEmailByEntity(email);
+		String decryptedPassword = this.encryptDecrypt.decrypt(entity.getPassword());
+		if (Password.equals(decryptedPassword)) {
+			return true;
+		}else {
+			return false;
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("You have an Exception " + e.getMessage());
+			return false;
+		}
+		
+	}
+
 }

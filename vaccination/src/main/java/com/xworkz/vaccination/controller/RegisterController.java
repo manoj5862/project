@@ -41,24 +41,25 @@ public class RegisterController {
 
 		System.out.println("Invoked onRegister Method");
 		try {
-		Integer dto1 = dto.getOtp();
-		if (randomNumber.equals(dto1)) {
-			this.registerService.serviceSave(dto);
-			model.addAttribute("RegisterSuccessMessage", "Registeration Successfull");
-			System.out.println("Successfully Registerd");
-			return "RegisterSuccess";
+			Integer dto1 = dto.getOtp();
+			if (randomNumber.equals(dto1)) {
+				this.registerService.serviceSave(dto);
+				model.addAttribute("RegisterSuccessMessage", "Registeration Successfull !! Login here");
+				System.out.println("Successfully Registerd");
+				return "Login";
 
-		} else {
-			model.addAttribute("RegisterSuccessMessage", "Registeration Failed");
-			System.out.println("Successfully Failed");
-			return "RegisterSuccess";
-			
-		}
-		}catch (Exception e) {
+			} else {
+				model.addAttribute("RegisterSuccessMessage", "Registeration Failed");
+				System.out.println("Successfully Failed");
+				return "Login";
+
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("You have an exception "+e.getMessage());
+			System.out.println("You have an exception " + e.getMessage());
 			return "Exception";
 		}
-		
+
 	}
+
 }

@@ -1,8 +1,10 @@
 package com.xworkz.vaccination.repository;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.QueryProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -41,4 +43,28 @@ public class RegisterDAOImpl implements RegisterDAO {
 		}
 	}
 
+	@Override
+	public RegisterEntity getEmailByEntity(String email) {
+
+		RegisterEntity enrollEntity = null;
+		Object session = null;
+		try {
+			session = this.factory.openSession();
+			Query<RegisterEntity> query = ((QueryProducer) session).createNamedQuery("GetRecordByMail");
+			query.setParameter("em", email);
+			enrollEntity = query.uniqueResult();
+			return enrollEntity;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("You have an exception " + e.getMessage());
+			return null;
+		} finally {
+			if (session != null) {
+				System.out.println("Session is closed");
+			} else {
+				System.out.println("Session is not closed");
+			}
+		}
+
+	}
 }

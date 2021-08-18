@@ -13,7 +13,7 @@
 		<a class="navbar-brand" class="float-right" href="#">About</a>
 	</nav>
 	
-	<h4 style="color: Orange;">Vaccination Application</h4>
+	<h4 style="color: Orange;">Register Here</h4>
 	<h6>
 		<span style="color: red;">${OtpSuccessMessage}</span>
 	</h6>

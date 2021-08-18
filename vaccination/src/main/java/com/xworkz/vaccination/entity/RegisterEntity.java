@@ -4,12 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "vaccination_table")
+@NamedQueries({ @NamedQuery(name = "GetRecordByMail", query = "SELECT citizen FROM RegisterEntity citizen WHERE citizen.email=:em ") })
 public class RegisterEntity {
 	@Id
 	@GenericGenerator(name = "auto", strategy = "increment")
