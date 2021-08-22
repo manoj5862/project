@@ -3,9 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/Javaee http://xmlns.jcp.org/xml/ns/Javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
-<welcome-file-list>
-<welcome-file>Vaccination.jsp</welcome-file>
-</welcome-file-list>
+
 	<display-name>spring-vaccination</display-name>
 	<servlet>
 		<servlet-name>ds</servlet-name>

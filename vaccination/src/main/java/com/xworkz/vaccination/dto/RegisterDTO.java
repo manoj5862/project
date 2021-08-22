@@ -3,22 +3,29 @@ package com.xworkz.vaccination.dto;
 public class RegisterDTO {
 	private String username;
 	private String email;
-	private int otp;
+	private int age;
 	private String password;
 	private String cpassword;
-	private long phonenumber;
+	private Long phonenumber;
+	private String gender;
 	private String vaccineType;
 
-	public String getVaccineType() {
-		return vaccineType;
+	public RegisterDTO() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setVaccineType(String vaccineType) {
-		this.vaccineType = vaccineType;
-	}
-
-	public void setPhonenumber(long phonenumber) {
+	public RegisterDTO(String username, String email, int age, String password, String cpassword, Long phonenumber,
+			String gender, String vaccineType) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.age = age;
+		this.password = password;
+		this.cpassword = cpassword;
 		this.phonenumber = phonenumber;
+		this.gender = gender;
+		this.vaccineType = vaccineType;
 	}
 
 	public String getUsername() {
@@ -37,12 +44,12 @@ public class RegisterDTO {
 		this.email = email;
 	}
 
-	public int getOtp() {
-		return otp;
+	public int getAge() {
+		return age;
 	}
 
-	public void setOtp(int otp) {
-		this.otp = otp;
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	public String getPassword() {
@@ -61,18 +68,35 @@ public class RegisterDTO {
 		this.cpassword = cpassword;
 	}
 
-	public long getPhonenumber() {
+	public Long getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(int phonenumber) {
+	public void setPhonenumber(Long phonenumber) {
 		this.phonenumber = phonenumber;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getVaccineType() {
+		return vaccineType;
+	}
+
+	public void setVaccineType(String vaccineType) {
+		this.vaccineType = vaccineType;
 	}
 
 	@Override
 	public String toString() {
-		return "RegisterDTO [username=" + username + ", email=" + email + ", otp=" + otp + ", password=" + password
-				+ ", cpassword=" + cpassword + ", phonenumber=" + phonenumber + ", vaccineType=" + vaccineType + "]";
+		return "RegisterDTO [username=" + username + ", email=" + email + ", age=" + age + ", password=" + password
+				+ ", cpassword=" + cpassword + ", phonenumber=" + phonenumber + ", gender=" + gender + ", vaccineType="
+				+ vaccineType + "]";
 	}
 	
 	

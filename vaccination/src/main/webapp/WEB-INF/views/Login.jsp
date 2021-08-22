@@ -16,19 +16,28 @@
 	<h6>
 		<span style="color: Blue;">${RegisterSuccessMessage}</span>
 	</h6>
-	<form action="Login.do">
+	<form action="Login.do" method="get">
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="orderFrom">Email :</label> <input type="email"
+				<label for="orderFrom">Email :</label> <input type="text"
 					class="form-control" id="email" name="email"
-					placeholder="Enter your Email Id" required="required">
+					placeholder="Enter your Email Id" >
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
 				<label for="orderFrom">Password :</label> <input type="password"
 					class="form-control" id="password" name="password"
-					placeholder="Enter Password" required="required">
+					placeholder="Enter Password" >
+					<h6>
+		<span style="color: red;">${LoginSuccessMessage}</span>
+	</h6>
+	<h6>
+		<span style="color: red;">${LoginBlockMessage}</span>
+	</h6>
+	<h6>
+		<span style="color: red;">${LoginEmailAndPasswordEmptyValidateMessage}</span>
+	</h6>
 			</div>
 		</div>
 	</br> </br>

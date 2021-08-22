@@ -12,7 +12,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "vaccination_table")
-@NamedQueries({ @NamedQuery(name = "GetRecordByMail", query = "SELECT citizen FROM RegisterEntity citizen WHERE citizen.email=:em ") })
+@NamedQueries({
+		@NamedQuery(name = "GetRecordByMail", query = "SELECT citizen FROM RegisterEntity citizen WHERE citizen.email=:em "),
+        @NamedQuery(name = "updateNoOfLoginAttempByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:login where entity.email=:emailId") })
+
 public class RegisterEntity {
 	@Id
 	@GenericGenerator(name = "auto", strategy = "increment")
@@ -23,30 +26,50 @@ public class RegisterEntity {
 	private String username;
 	@Column(name = "EMAIL")
 	private String email;
-	@Column(name = "OTP")
-	private int otp;
+	@Column(name = "AGE")
+	private int age;
 	@Column(name = "PASSWORD")
 	private String password;
 	@Column(name = "PHONENUMBER")
 	private long phonenumber;
 	@Column(name = "VACCINETYPE")
 	private String vaccineType;
+	@Column(name = "NO_OF_lOGIN_ATTEMPT")
+	private int noOfLoginAttempts;
+	
 
 	public RegisterEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RegisterEntity(int id, String username, String email, int otp, String password, long phonenumber,
-			String vaccineType) {
+	public RegisterEntity(int id, String username, String email, int age, String password, long phonenumber,
+			String vaccineType, int noOfLoginAttempts) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
-		this.otp = otp;
+		this.age = age;
 		this.password = password;
 		this.phonenumber = phonenumber;
 		this.vaccineType = vaccineType;
+		this.noOfLoginAttempts = noOfLoginAttempts;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getNoOfLoginAttempts() {
+		return noOfLoginAttempts;
+	}
+
+	public void setNoOfLoginAttempts(int noOfLoginAttempts) {
+		this.noOfLoginAttempts = noOfLoginAttempts;
 	}
 
 	public int getId() {
@@ -98,17 +121,18 @@ public class RegisterEntity {
 	}
 
 	public int getOtp() {
-		return otp;
+		return age;
 	}
 
 	public void setOtp(int otp) {
-		this.otp = otp;
+		this.age = otp;
 	}
 
 	@Override
 	public String toString() {
-		return "RegisterEntity [id=" + id + ", username=" + username + ", email=" + email + ", otp=" + otp
-				+ ", password=" + password + ", phonenumber=" + phonenumber + ", vaccineType=" + vaccineType + "]";
+		return "RegisterEntity [id=" + id + ", username=" + username + ", email=" + email + ", age=" + age
+				+ ", password=" + password + ", phonenumber=" + phonenumber + ", vaccineType=" + vaccineType
+				+ ", noOfLoginAttempts=" + noOfLoginAttempts + "]";
 	}
 
 }

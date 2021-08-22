@@ -15,60 +15,93 @@
 	
 	<h4 style="color: Orange;">Register Here</h4>
 	<h6>
-		<span style="color: red;">${OtpSuccessMessage}</span>
+	   <span style="color: red;">${OtpVerificationMessage}</span>
 	</h6>
 	<form action="Register.do">
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="orderFrom">UserName :</label> <input type="text"
+				<label for="userName">UserName :</label> <input type="text"
 					class="form-control" id="username" name="username"
-					placeholder="Enter your name" required="required">
+					placeholder="Enter your name" >
+					<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="phoneNo">Email :</label> <input type="email"
+				<label for="email">Email :</label> <input type="email"
 					class="form-control" id="email" name="email"
-					placeholder="Enter your mail" required="required">
+					placeholder="Enter your mail" >
+					<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="cardType">Vaccine Type :</label> <select multiple
-					class="form-control" id="vaccineType" name="vaccineType" required="required">
+				<label for="vaccineType">Vaccine Type :</label> <select multiple
+					class="form-control" id="vaccineType" name="vaccineType" >
 					<option>Covaxin</option>
 					<option>Covishield</option>
 					<option>Sputnic</option>
-					
 				</select>
+					<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="phoneNo">OTP :</label> <input type="number"
-					class="form-control" id="otp" name="otp"
-					placeholder="Enter Otp" required="required">
+				<label for="age">Age :</label> <input type="number"
+					class="form-control" id="age" name="age"
+					placeholder="Enter Age" >
+						<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>	
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
 				<label for="phoneNo">Phone Number :</label> <input type="number"
 					class="form-control" id="phonenumber" name="phonenumber"
-					placeholder="Enter Phone Number" required="required">
+					placeholder="Enter Phone Number" >
+						<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="phoneNo">Password :</label> <input type="password"
+				<label for="gender">Gender :</label> <select multiple
+					class="form-control" id="gender" name="gender" >
+					<option>Male</option>
+					<option>Female</option>
+					<option>Others</option>
+				</select>
+					<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="w-50">
+				<label for="password">Password :</label> <input type="password"
 					class="form-control" id="password" name="password"
-					placeholder="Enter Password" required="required">
+					placeholder="Enter Password" >
+						<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="w-50">
-				<label for="phoneNo">Confirm Password :</label> <input type="password"
+				<label for="confirmPassword">Confirm Password :</label> <input type="password"
 					class="form-control" id="cpassword" name="cpassword"
-					placeholder="Enter Conform Password" required="required">
+					placeholder="Enter Conform Password" >
+						<h6>
+	   <span style="color: red;">${ErrorMessage}</span>
+	       </h6>
 			</div>
 		</div>
 		</br>

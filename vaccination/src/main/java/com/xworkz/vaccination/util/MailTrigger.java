@@ -15,11 +15,20 @@ public class MailTrigger {
 		System.out.println("Created" + this.getClass().getSimpleName());
 	}
 
-	public void mailTrigger(String email, String subject, String text) {
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setTo(email);
-		mailMessage.setSubject(subject);
-		mailMessage.setText(text);
-		this.mailSender.send(mailMessage);
+	public boolean mailTrigger(String email, String subject, String text) {
+		try {
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setTo(email);
+			mailMessage.setSubject(subject);
+			mailMessage.setText(text);
+			this.mailSender.send(mailMessage);
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("You have an exception "+e.getMessage());
+			return false;
+		}
+		
+		
 	}
 }

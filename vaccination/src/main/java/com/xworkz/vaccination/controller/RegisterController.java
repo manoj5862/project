@@ -1,5 +1,7 @@
 package com.xworkz.vaccination.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xworkz.vaccination.dto.RegisterDTO;
 import com.xworkz.vaccination.service.RegisterService;
+import com.xworkz.vaccination.service.RegisterServiceImpl;
 import com.xworkz.vaccination.util.MailTrigger;
 import com.xworkz.vaccination.util.RandomNumberGenerator;
 
 @Controller
 public class RegisterController {
-
+	Map<String, String> map = RegisterServiceImpl.map;
 	@Autowired
 	private RegisterService registerService;
 
@@ -25,41 +28,51 @@ public class RegisterController {
 		System.out.println("Created" + this.getClass().getSimpleName());
 	}
 
-	Integer randomNumber;
-
-	@RequestMapping("/GetOtp.do")
-	public String getOtp(@RequestParam String email, Model model) {
-		randomNumber = RandomNumberGenerator.randomNumberGenerator(1000, 9999);
-		this.mailTrigger.mailTrigger(email, "Vaccination OTP", "Hello!! Your OTP for Vaccination is " + randomNumber);
-		model.addAttribute("OtpSuccessMessage", "Your Otp sent to mail id");
-		System.out.println("OTP is generated");
-		return "Register";
-	}
-
 	@RequestMapping("/Register.do")
 	public String onRegister(@ModelAttribute RegisterDTO dto, Model model) {
 
 		System.out.println("Invoked onRegister Method");
-		try {
-			Integer dto1 = dto.getOtp();
-			if (randomNumber.equals(dto1)) {
-				this.registerService.serviceSave(dto);
-				model.addAttribute("RegisterSuccessMessage", "Registeration Successfull !! Login here");
-				System.out.println("Successfully Registerd");
-				return "Login";
-
-			} else {
-				model.addAttribute("RegisterSuccessMessage", "Registeration Failed");
-				System.out.println("Successfully Failed");
-				return "Login";
-
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("You have an exception " + e.getMessage());
-			return "Exception";
+		boolean outcome = this.registerService.registerServiceValidate(dto);
+		if (outcome) {
+			this.registerService.serviceSave(dto);
+			return "Login";
+		} else if (!map.get("name").isEmpty() && dto.getUsername().isEmpty()) {
+			model.addAttribute("ErrorMessage", map.get("name"));
+			return "Register";
+		}else if (!map.get("email").isEmpty() && dto.getEmail().isEmpty()) {
+			model.addAttribute("ErrorMessage", map.get("email"));
+			return "Register";
 		}
-
+		else if (!map.get("password").isEmpty() && dto.getPassword().isEmpty()) {
+			model.addAttribute("ErrorMessage", map.get("password"));
+			return "Register";
+		}
+		else if (!map.get("mobile").isEmpty()) {
+			model.addAttribute("ErrorMessage", map.get("mobile"));
+			return "Register";
+		}
+		else if (!map.get("gender").isEmpty() && dto.getGender().isEmpty()) {
+			model.addAttribute("ErrorMessage", map.get("gender"));
+			return "Register";
+		}
+		else if (!map.get("type").isEmpty() && dto.getVaccineType().isEmpty()) {
+		    model.addAttribute("ErrorMessage", map.get("type"));
+			return "Register";
+		}
+		else if (!map.get("type").isEmpty() && dto.getVaccineType().isEmpty()) {
+		    model.addAttribute("ErrorMessage", map.get("type"));
+			return "Register";
+		}
+		else if (!map.get("age").isEmpty() && dto.getVaccineType().isEmpty()) {
+		    model.addAttribute("ErrorMessage", map.get("age"));
+			return "Register";
+		}
+		else if (!map.get("confirmPassword").isEmpty() && dto.getVaccineType().isEmpty()) {
+		    model.addAttribute("ErrorMessage", map.get("confirmPassword"));
+			return "Register";
+		}
+		
+		return null;
 	}
 
 }
