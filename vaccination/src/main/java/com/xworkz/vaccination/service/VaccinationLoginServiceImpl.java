@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xworkz.vaccination.entity.RegisterEntity;
 import com.xworkz.vaccination.repository.VaccinationLoginDAO;
+import com.xworkz.vaccination.util.EmailValidator;
 import com.xworkz.vaccination.util.PasswordEncryptorAndDecryptor;
 
 @Service
@@ -59,11 +60,21 @@ public class VaccinationLoginServiceImpl implements VaccinationLoginService {
 
 	@Override
 	public boolean loginEmailAndPasswordValidate(String email, String Password) {
-		if(!email.isEmpty() && email !=null && Password != null && !Password.isEmpty()) {
+		if (!email.isEmpty() && email != null && Password != null && !Password.isEmpty()) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
-		
+
+	}
+
+	@Override
+	public boolean validateEmail(String email) {
+		boolean outcome = EmailValidator.emailValidate(email);
+		if (outcome) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

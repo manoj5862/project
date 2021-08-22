@@ -38,6 +38,9 @@
 	<h6>
 		<span style="color: red;">${LoginEmailAndPasswordEmptyValidateMessage}</span>
 	</h6>
+	<h6>
+		<span style="color: red;">${LoginEmailVerifyMessage}</span>
+	</h6>
 			</div>
 		</div>
 	</br> </br>
