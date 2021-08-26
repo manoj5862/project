@@ -6,4 +6,6 @@ public interface VaccinationLoginDAO {
 	RegisterEntity getEmailByEntity(String email);
 
 	void updateAttempt(int noOfUnsuccesfulLoginAttempts, String email);
+
+	Integer getNoOFLoginAttemptsByEmailId(String mail);
 }

@@ -1,5 +1,9 @@
 package com.xworkz.vaccination.repository;
 
+import java.util.Objects;
+
+import javax.servlet.jsp.tagext.TryCatchFinally;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -10,12 +14,13 @@ import org.springframework.stereotype.Repository;
 
 import com.xworkz.vaccination.entity.RegisterEntity;
 import com.xworkz.vaccination.util.PasswordEncryptorAndDecryptor;
+
 @Repository
-public class VaccinationLoginDAOImpl implements VaccinationLoginDAO{
+public class VaccinationLoginDAOImpl implements VaccinationLoginDAO {
 
 	@Autowired
 	private SessionFactory factory;
-	
+
 	@Override
 	public RegisterEntity getEmailByEntity(String email) {
 
@@ -40,7 +45,7 @@ public class VaccinationLoginDAOImpl implements VaccinationLoginDAO{
 		}
 
 	}
-	
+
 	@Override
 	public void updateAttempt(int noOfUnsuccesfulLoginAttemps, String email) {
 		Session session = null;
@@ -55,13 +60,41 @@ public class VaccinationLoginDAOImpl implements VaccinationLoginDAO{
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
-			System.out.println("You have an exception "+e.getMessage());
+			System.out.println("You have an exception " + e.getMessage());
 		} finally {
 			if (session != null) {
 				session.close();
 			}
 
 		}
+
+	}
+
+	@Override
+	public Integer getNoOFLoginAttemptsByEmailId(String mail) {
+		System.out.println("Invoked getNoOFLoginAttemptsByEmailId");
+		Session session = null;
+		try {
+			session = factory.openSession();
+			Query<Object> query = session.getNamedQuery("getNoOfLoginAttemptsByMail");
+			query.setParameter("em", mail);
+			Object object = query.uniqueResult();
+			if (object != null) {
+				Integer noOfLoginAttempts = (Integer) object;
+				return noOfLoginAttempts;
+			}
+
+		} catch (HibernateException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (Objects.nonNull(session)) {
+				session.close();
+				System.out.println("Session is closed");
+			} else {
+				System.out.println("Session is not closed");
+			}
+		}
+		return null;
 
 	}
 

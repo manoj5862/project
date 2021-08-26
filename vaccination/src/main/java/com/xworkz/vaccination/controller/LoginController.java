@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.xworkz.vaccination.service.RegisterService;
 import com.xworkz.vaccination.service.VaccinationLoginService;
+import com.xworkz.vaccination.service.VaccinationOTPService;
 
 import javassist.bytecode.stackmap.BasicBlock.Catch;
 
@@ -15,6 +16,9 @@ public class LoginController {
 
 	@Autowired
 	private VaccinationLoginService loginService;
+	
+	@Autowired
+	private VaccinationOTPService vaccinationOTPService;
 
 	public LoginController() {
 		System.out.println("Created" + this.getClass().getSimpleName());
@@ -25,7 +29,7 @@ public class LoginController {
 
 		return "Login";
 	}
-
+	
 	@RequestMapping("/Login.do")
 	public String onLogin(@RequestParam String email, @RequestParam String password, Model model) {
 		System.out.println("Invoked Login method");
@@ -33,9 +37,33 @@ public class LoginController {
 		if (outcome) {
 			boolean result = this.loginService.validateEmail(email);
 			if(result) {
-				this.loginService.loginService(email, password, model);
+			boolean verifyEmailFromDb = this.vaccinationOTPService.verifyEmailFromDB(email);
+			if (verifyEmailFromDb) {
+				boolean checkNoOfLoginAttempts = this.loginService.CheckNoOfLoginAttempts(email);
+				if (checkNoOfLoginAttempts) {
+				boolean loginSuccessResult = this.loginService.loginService(email, password, model);
+				if(loginSuccessResult) {
+					model.addAttribute("LoginSuccessMessage", "Login Successfull");
+					System.out.println("Successfully Logged In");
+					return "LoginSuccess";
+				}else {
+					model.addAttribute("LoginFailMessage", "Incorrect Password Entered");
+					System.out.println("Incorrect Password Entered");
+					return "Login";
+				}
+				}else {
+					model.addAttribute("LoginBlockMessage", "User is blocked exceeded no of login attempts");
+					System.out.println("User is blocked exceeded no of login attempts");
+					return "Login";
+				}
 			}else {
-				model.addAttribute("LoginEmailVerifyMessage", "Invalid Email Entered");
+				model.addAttribute("EmailVerifyMessage", "The Mail You Entered Is Not Exist");
+				return "Login";
+			}
+			
+				
+			}else {
+				model.addAttribute("LoginEmailVerifyMessage", "The Mail You Entered is not correct");
 				return "Login";
 			}
 			
@@ -43,7 +71,7 @@ public class LoginController {
 			model.addAttribute("LoginEmailAndPasswordEmptyValidateMessage", "Email or Password Cannot be empty");
 			return "Login";
 		}
-		return null;
+		
 		}catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("You have an exception " +e.getMessage());

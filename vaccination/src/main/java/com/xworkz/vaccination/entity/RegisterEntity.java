@@ -14,8 +14,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "vaccination_table")
 @NamedQueries({
 		@NamedQuery(name = "GetRecordByMail", query = "SELECT citizen FROM RegisterEntity citizen WHERE citizen.email=:em "),
-        @NamedQuery(name = "updateNoOfLoginAttempByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:login where entity.email=:emailId") })
-
+        @NamedQuery(name = "updateNoOfLoginAttempByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:login where entity.email=:emailId"),
+        @NamedQuery(name = "getNoOfLoginAttemptsByMail", query = "SELECT citizen.noOfLoginAttempts FROM RegisterEntity citizen WHERE citizen.email=:em "),
+        @NamedQuery(name = "updatePasswordByEmail", query = "update  RegisterEntity entity set entity.password=:pass where entity.email=:emailId"),
+        @NamedQuery(name = "updateNoOfLoginAttemptsByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:loginAttempts where entity.email=:emailId")})
 public class RegisterEntity {
 	@Id
 	@GenericGenerator(name = "auto", strategy = "increment")

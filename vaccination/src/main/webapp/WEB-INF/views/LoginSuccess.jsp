@@ -15,6 +15,9 @@
 	<h6>
 		<span style="color: Green;">${LoginSuccessMessage}</span>
 	</h6>
+	<form action="logout.do">
+	<button type="submit" class="btn btn-success btn-sm">Logout</button>
+	</form>
 
 <footer style="background: #e5fde3;"
 		class="page-footer font-small black">
