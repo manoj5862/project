@@ -19,6 +19,8 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.xworkz.vaccination.entity.RegisterEntity</value>
+				<value>com.xworkz.vaccination.entity.AddMemberEntity</value>
+				
 			</list>
 		</property>
 	</bean> 

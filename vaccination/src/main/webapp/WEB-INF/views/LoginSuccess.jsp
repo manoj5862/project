@@ -10,15 +10,27 @@
 <body>
 	<nav class="navbar navbar-light" style="background-color: #e5fde3;">
 		<a class="navbar-brand" href="#">Vaccination</a> <a
-			class="navbar-brand" class="float-right" href="#">About</a>
+			class="navbar-brand" class="float-right" href="#">
+			</a>
+			<h6>${UserName}</h6>
 	</nav>
+	<nav class="navbar navbar-light" style="background-color: #e5fde3;">
+		<a class="navbar-brand" href="#"></a> <a
+			class="navbar-brand" class="float-right" href="#">
+			</a>	
+			<form action="logout.do">
+	<button type="submit" class="btn btn-success btn-sm">Logout</button>
+	</form>
+	</nav>
+	
 	<h6>
 		<span style="color: Green;">${LoginSuccessMessage}</span>
 	</h6>
-	<form action="logout.do">
-	<button type="submit" class="btn btn-success btn-sm">Logout</button>
+	
+	<form action="AddMemberPage.do">
+	<button type="submit" class="btn btn-success btn-sm">AddMember</button>
 	</form>
-
+	
 <footer style="background: #e5fde3;"
 		class="page-footer font-small black">
 		<div class="footer-copyright text-center py-3">© 2021 Copyright</div>

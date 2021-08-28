@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.xworkz.vaccination.service.RegisterService;
 import com.xworkz.vaccination.service.VaccinationLoginService;
+import com.xworkz.vaccination.service.VaccinationLoginServiceImpl;
 import com.xworkz.vaccination.service.VaccinationOTPService;
 
 import javassist.bytecode.stackmap.BasicBlock.Catch;
@@ -44,6 +45,7 @@ public class LoginController {
 				boolean loginSuccessResult = this.loginService.loginService(email, password, model);
 				if(loginSuccessResult) {
 					model.addAttribute("LoginSuccessMessage", "Login Successfull");
+					model.addAttribute("UserName", VaccinationLoginServiceImpl.UserName);
 					System.out.println("Successfully Logged In");
 					return "LoginSuccess";
 				}else {

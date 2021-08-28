@@ -19,6 +19,8 @@ public class VaccinationLoginServiceImpl implements VaccinationLoginService {
 	@Autowired
 	private PasswordEncryptorAndDecryptor encryptDecrypt;
 
+	public static String UserName;
+	
 	public VaccinationLoginServiceImpl() {
 		System.out.println("Created " + this.getClass().getSimpleName());
 	}
@@ -33,7 +35,7 @@ public class VaccinationLoginServiceImpl implements VaccinationLoginService {
 			if (entity != null && !entity.getEmail().isEmpty() && entity.getEmail() != null
 					&& !entity.getPassword().isEmpty() && entity.getPassword() != null
 					&& Password.equals(decryptedPassword)) {
-
+                UserName = entity.getUsername();
 				return true;
 			} else {
 				Integer loginAttempts = entity.getNoOfLoginAttempts();
