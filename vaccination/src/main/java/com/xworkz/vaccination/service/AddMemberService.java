@@ -7,5 +7,6 @@ import com.xworkz.vaccination.entity.AddMemberEntity;
 
 public interface AddMemberService {
 boolean ValidateAddMemberDTO(AddMemberDTO addMemberDTO);
-List<AddMemberEntity> AddMemberDTOSave(AddMemberDTO addMemberDTO);
+List<Object> AddMemberDTOSave(AddMemberDTO addMemberDTO);
+boolean checkAddMemberCount(String EmailId);
 }

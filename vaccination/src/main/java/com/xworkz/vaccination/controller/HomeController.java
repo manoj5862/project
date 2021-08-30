@@ -13,6 +13,7 @@ import com.xworkz.vaccination.dto.AddMemberDTO;
 import com.xworkz.vaccination.entity.AddMemberEntity;
 import com.xworkz.vaccination.service.AddMemberService;
 import com.xworkz.vaccination.service.AddMemberServiceImpl;
+import com.xworkz.vaccination.service.VaccinationLoginServiceImpl;
 
 @Controller
 public class HomeController {
@@ -36,11 +37,17 @@ public class HomeController {
 	public String onAddMember(@ModelAttribute AddMemberDTO addMemberDTO, Model model) {
 		boolean outcome = this.addMemberService.ValidateAddMemberDTO(addMemberDTO);
 		if (outcome) {
-	    List<AddMemberEntity> result = this.addMemberService.AddMemberDTOSave(addMemberDTO);
+		boolean checkNoOfAddMemberCount = this.addMemberService.checkAddMemberCount(VaccinationLoginServiceImpl.emailId);
+		if(checkNoOfAddMemberCount) {
+			List<Object> result = this.addMemberService.AddMemberDTOSave(addMemberDTO);
 	        model.addAttribute("SuccessMessage", "Records Fetched SuccessFully");
 	    	model.addAttribute("Members", result);
 	    	return "HomeSuccess";
-		
+		}else {
+			model.addAttribute("NoOfMemberCount", "You can add Only Four Members");
+			return "HomeSuccess";
+		}
+	    
 		} else if ( addMemberDTO.getName().isEmpty() ) {
 			model.addAttribute("ErrorMessage", map.get("name"));
 			return "AddMember";

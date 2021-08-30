@@ -21,6 +21,10 @@ public class VaccinationLoginServiceImpl implements VaccinationLoginService {
 
 	public static String UserName;
 	
+	public static  String emailId;
+	
+	public static int noOfAddMemberCount;
+	
 	public VaccinationLoginServiceImpl() {
 		System.out.println("Created " + this.getClass().getSimpleName());
 	}
@@ -36,6 +40,8 @@ public class VaccinationLoginServiceImpl implements VaccinationLoginService {
 					&& !entity.getPassword().isEmpty() && entity.getPassword() != null
 					&& Password.equals(decryptedPassword)) {
                 UserName = entity.getUsername();
+                emailId = entity.getEmail();
+                noOfAddMemberCount = entity.getNoAddMemberCount();
 				return true;
 			} else {
 				Integer loginAttempts = entity.getNoOfLoginAttempts();

@@ -8,4 +8,6 @@ public interface AddMemberDAO {
 
 	boolean AddMemberDTOSave(AddMemberEntity addMemberEntity);
 	List<AddMemberEntity> FetchAllEntities();	
+    int CheckAddMemberCountByMail(String emailId);
+    void updateAddMemberCountByEmailId(int addMemberCount, String emailId);
 }

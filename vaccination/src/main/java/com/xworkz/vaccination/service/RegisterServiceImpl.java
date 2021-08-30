@@ -59,6 +59,7 @@ public class RegisterServiceImpl implements RegisterService {
 			BeanUtils.copyProperties(dto, entity);
 			String encryptedPassword = this.encryptDecrypt.encrypt(dto.getPassword());
 			entity.setPassword(encryptedPassword);
+			entity.setNoAddMemberCount(0);
 			entity.setNoOfLoginAttempts(0);
 			boolean outcome = this.dao.regsiterDao(entity);
 			if (outcome) {

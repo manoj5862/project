@@ -17,7 +17,10 @@ import org.hibernate.annotations.GenericGenerator;
         @NamedQuery(name = "updateNoOfLoginAttempByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:login where entity.email=:emailId"),
         @NamedQuery(name = "getNoOfLoginAttemptsByMail", query = "SELECT citizen.noOfLoginAttempts FROM RegisterEntity citizen WHERE citizen.email=:em "),
         @NamedQuery(name = "updatePasswordByEmail", query = "update  RegisterEntity entity set entity.password=:pass where entity.email=:emailId"),
-        @NamedQuery(name = "updateNoOfLoginAttemptsByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:loginAttempts where entity.email=:emailId")})
+        @NamedQuery(name = "updateNoOfLoginAttemptsByEmail", query = "update  RegisterEntity entity set entity.noOfLoginAttempts=:loginAttempts where entity.email=:emailId"),
+        @NamedQuery(name = "getNoOfCheckAddmembersByMail", query = "SELECT citizen.noAddMemberCount FROM RegisterEntity citizen WHERE citizen.email=:em "),
+        @NamedQuery(name = "updateAddMemberCountByEmail", query = "update  RegisterEntity entity set entity.noAddMemberCount=:addMemberCount where entity.email=:emailId")
+		})
 public class RegisterEntity {
 	@Id
 	@GenericGenerator(name = "auto", strategy = "increment")
@@ -38,7 +41,31 @@ public class RegisterEntity {
 	private String vaccineType;
 	@Column(name = "NO_OF_lOGIN_ATTEMPT")
 	private int noOfLoginAttempts;
+	@Column(name = "NOOF_ADDMEMBER_COUNT")
+	private int noAddMemberCount;
 	
+
+	public int getNoAddMemberCount() {
+		return noAddMemberCount;
+	}
+
+	public void setNoAddMemberCount(int noAddMemberCount) {
+		this.noAddMemberCount = noAddMemberCount;
+	}
+
+	public RegisterEntity(int id, String username, String email, int age, String password, long phonenumber,
+			String vaccineType, int noOfLoginAttempts, int noAddMemberCount) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.age = age;
+		this.password = password;
+		this.phonenumber = phonenumber;
+		this.vaccineType = vaccineType;
+		this.noOfLoginAttempts = noOfLoginAttempts;
+		this.noAddMemberCount = noAddMemberCount;
+	}
 
 	public RegisterEntity() {
 		super();
@@ -134,7 +161,7 @@ public class RegisterEntity {
 	public String toString() {
 		return "RegisterEntity [id=" + id + ", username=" + username + ", email=" + email + ", age=" + age
 				+ ", password=" + password + ", phonenumber=" + phonenumber + ", vaccineType=" + vaccineType
-				+ ", noOfLoginAttempts=" + noOfLoginAttempts + "]";
+				+ ", noOfLoginAttempts=" + noOfLoginAttempts + ", noAddMemberCount=" + noAddMemberCount + "]";
 	}
 
 }

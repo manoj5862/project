@@ -18,6 +18,7 @@
 			</a>
 	</nav>
 	<h4><span style="color: Green;">${SuccessMessage}</span></h4>
+	<h4><span style="color: Green;">${NoOfMemberCount}</span></h4>
 	<table>
 		<tr>
 			<th>Id</th>

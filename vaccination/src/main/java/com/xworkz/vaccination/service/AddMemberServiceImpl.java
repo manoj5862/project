@@ -1,5 +1,6 @@
 package com.xworkz.vaccination.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.xworkz.vaccination.dto.AddMemberDTO;
 import com.xworkz.vaccination.entity.AddMemberEntity;
+import com.xworkz.vaccination.entity.RegisterEntity;
 import com.xworkz.vaccination.repository.AddMemberDAO;
 
 @Service
@@ -17,6 +19,8 @@ public class AddMemberServiceImpl implements AddMemberService{
 	
 	@Autowired
 	private AddMemberDAO addMemberDAO;
+	
+	RegisterEntity entity = new RegisterEntity();
 
 	public static Map<String, String> map = new HashMap<String, String>();
 	
@@ -45,17 +49,21 @@ public class AddMemberServiceImpl implements AddMemberService{
 	}
 
 	@Override
-	public List<AddMemberEntity> AddMemberDTOSave(AddMemberDTO addMemberDTO) {
+	public List<Object> AddMemberDTOSave(AddMemberDTO addMemberDTO) {
 		System.out.println("Invoked AddMemberDTOSave");
+		
 		AddMemberEntity addMemberEntity = new AddMemberEntity();
         BeanUtils.copyProperties(addMemberDTO, addMemberEntity);
        boolean result = this.addMemberDAO.AddMemberDTOSave(addMemberEntity);
        if(result) {
     	   System.out.println("Successfully Saved Into Db");
+    	   int updateAddMemberCountByEmailId = VaccinationLoginServiceImpl.noOfAddMemberCount;
+    	   updateAddMemberCountByEmailId++;
+           this.addMemberDAO.updateAddMemberCountByEmailId(updateAddMemberCountByEmailId, VaccinationLoginServiceImpl.emailId);
     	   List<AddMemberEntity> listOfAddMemberEntities = this.addMemberDAO.FetchAllEntities();
     	   if (listOfAddMemberEntities != null) {
     		   System.out.println("Fetched All the records Successfully");
-    		   return listOfAddMemberEntities;
+    		   return new ArrayList<Object>(listOfAddMemberEntities);
 		}else {
 			System.out.println("Not able to fetch the records");
 			return null;
@@ -65,6 +73,17 @@ public class AddMemberServiceImpl implements AddMemberService{
     	   System.out.println("Not Saved Into Db");
     	   return null;
        }
+		
+	}
+
+	@Override
+	public boolean checkAddMemberCount(String EmailId) {
+	int addMemberCount = this.addMemberDAO.CheckAddMemberCountByMail(EmailId);
+	if(addMemberCount < 5) {
+		return true;
+	}else {
+		return false;
+	}
 		
 	}
 	
